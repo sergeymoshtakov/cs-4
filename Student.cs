@@ -26,16 +26,26 @@ namespace studentNamespace
     }
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams)
     {
-      setName(name);
-      setSurname(surname);
-      setPatronim(patronim);
-      setBirth(year, month, day);
-      setAdress(street, streetN, city, postalCode);
-      setNumber(number);
-      setTests(tests);
-      setHomeTasks(homeTasks);
-      setExams(exams);
-      Console.WriteLine("Main c-tor");
+      try
+      {
+        setName(name);
+        setSurname(surname);
+        setPatronim(patronim);
+        setBirth(year, month, day);
+        setAdress(street, streetN, city, postalCode);
+        setNumber(number);
+        setTests(tests);
+        setHomeTasks(homeTasks);
+        setExams(exams);
+      }
+      catch
+      {
+        Console.WriteLine("Wrong format!");
+      }
+      finally
+      {
+        Console.WriteLine("Main c-tor");
+      }
     }
     public string getName()
     {
@@ -75,57 +85,92 @@ namespace studentNamespace
     }
     public void setName(string name)
     {
-      if(name.Length>0)
+      try
       {
-        this.name = name;
+        if(name.Length>0)
+        {
+          this.name = name;
+        }
       }
-      else
+      catch
       {
-        surname = "None";
+        Console.WriteLine("Wrong name");
+      }
+      finally
+      {
+        Console.WriteLine("Name is set");
       }
     }
     public void setSurname(string surname)
     {
-      if(surname.Length>0)
+      try
       {
-        this.surname = surname;
+        if(surname.Length>0)
+        {
+          this.surname = surname;
+        }
       }
-      else
+      catch
       {
-        this.surname = "None";
+        Console.WriteLine("Wrong surname");
+      }
+      finally
+      {
+        Console.WriteLine("Surname is set");
       }
     }
     public void setPatronim(string patronim)
     {
-      if(patronim.Length>0)
+      try
       {
-        this.patronim = patronim;
+        if(patronim.Length>0)
+        {
+          this.patronim = patronim;
+        }
       }
-      else
+      catch
       {
-        this.patronim = "None";
+        Console.WriteLine("Wrong patronim");
+      }
+      finally
+      {
+        Console.WriteLine("Patronim is set");
       }
     }
     public void setBirth(int year, int month, int day)
     {
-      if((year>0)&&(month>0)&&(month<13)&&(day>0)&&(day<32))
+      try
       {
-        this.birth = new DateTime(year,month,day);
+        if((year>0)&&(month>0)&&(month<13)&&(day>0)&&(day<32))
+        {
+          this.birth = new DateTime(year,month,day);
+        }
       }
-      else
+      catch
       {
-        this.birth = new DateTime(2022,1,1);
+        Console.WriteLine("Wrong date");
+      }
+      finally
+      {
+        Console.WriteLine("Date is set");
       }
     }
     public void setNumber(string phoneNumber)
     {
-      if(Regex.IsMatch(phoneNumber, @"((380|\+380)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}"))
+      try
       {
-        this.phoneNumber = phoneNumber;
+        if(Regex.IsMatch(phoneNumber, @"((380|\+380)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}"))
+        {
+          this.phoneNumber = phoneNumber;
+        }
       }
-      else
+      catch
       {
-        this.phoneNumber = "+380-800-735-35-35";
+        Console.WriteLine("Wrong number");
+      }
+      finally
+      {
+        Console.WriteLine("Number is good");
       }
     }
     public void setAdress(string street, int streetN, string city, int postalCode)
@@ -147,26 +192,38 @@ namespace studentNamespace
     public override string ToString()
     {
       string testStr="\n", taskStr="", examStr="";
-      if(tests != null)
+      try
       {
         foreach(var test in tests)
         {
           testStr = test + "\n";
         }
       }
-      if(homeTasks != null)
+      catch(NullReferenceException e)
+      {
+        Console.WriteLine("No array list {0}", e.Message);
+      }
+      try
       {
         foreach(var task in homeTasks)
         {
           taskStr = task + "\n";
         }
       }
-      if(exams != null)
+      catch(NullReferenceException e)
+      {
+        Console.WriteLine("No array list {0}", e.Message);
+      }
+      try
       {
         foreach(var exam in exams)
         {
           examStr = exam + "\n";
         }
+      }
+      catch(NullReferenceException e)
+      {
+        Console.WriteLine("No array list {0}", e.Message);
       }
       return getName() + "\n" + getSurname() + "\n" + getPatronim() + "\n" + getBirth() + "\n" + getAdress() + "\n" + getPhone() + testStr + taskStr + examStr;
     }
