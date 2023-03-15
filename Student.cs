@@ -26,26 +26,16 @@ namespace studentNamespace
     }
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams)
     {
-      try
-      {
-        setName(name);
-        setSurname(surname);
-        setPatronim(patronim);
-        setBirth(year, month, day);
-        setAdress(street, streetN, city, postalCode);
-        setNumber(number);
-        setTests(tests);
-        setHomeTasks(homeTasks);
-        setExams(exams);
-      }
-      catch
-      {
-        Console.WriteLine("Wrong format!");
-      }
-      finally
-      {
-        Console.WriteLine("Main c-tor");
-      }
+      setName(name);
+      setSurname(surname);
+      setPatronim(patronim);
+      setBirth(year, month, day);
+      setAdress(street, streetN, city, postalCode);
+      setNumber(number);
+      setTests(tests);
+      setHomeTasks(homeTasks);
+      setExams(exams);
+      Console.WriteLine("Main c-tor");
     }
     public string getName()
     {
@@ -91,14 +81,14 @@ namespace studentNamespace
         {
           this.name = name;
         }
+        else
+        {
+          throw new Exception("Wrong name");
+        }
       }
-      catch
+      catch(Exception e)
       {
-        Console.WriteLine("Wrong name");
-      }
-      finally
-      {
-        Console.WriteLine("Name is set");
+        Console.WriteLine("{0}", e.Message);
       }
     }
     public void setSurname(string surname)
@@ -109,14 +99,14 @@ namespace studentNamespace
         {
           this.surname = surname;
         }
+        else
+        {
+          throw new Exception("Wrong surname");
+        }
       }
-      catch
+      catch(Exception e)
       {
-        Console.WriteLine("Wrong surname");
-      }
-      finally
-      {
-        Console.WriteLine("Surname is set");
+        Console.WriteLine("{0}", e.Message);
       }
     }
     public void setPatronim(string patronim)
@@ -127,14 +117,14 @@ namespace studentNamespace
         {
           this.patronim = patronim;
         }
+        else
+        {
+          throw new Exception("Wrong patronim");
+        }
       }
-      catch
+      catch(Exception e)
       {
-        Console.WriteLine("Wrong patronim");
-      }
-      finally
-      {
-        Console.WriteLine("Patronim is set");
+        Console.WriteLine("{0}", e.Message);
       }
     }
     public void setBirth(int year, int month, int day)
@@ -145,14 +135,14 @@ namespace studentNamespace
         {
           this.birth = new DateTime(year,month,day);
         }
+        else
+        {
+          throw new Exception("Wrong date");
+        }
       }
-      catch
+      catch(Exception e)
       {
-        Console.WriteLine("Wrong date");
-      }
-      finally
-      {
-        Console.WriteLine("Date is set");
+        Console.WriteLine("{0}", e.Message);
       }
     }
     public void setNumber(string phoneNumber)
@@ -163,10 +153,14 @@ namespace studentNamespace
         {
           this.phoneNumber = phoneNumber;
         }
+        else
+        {
+          throw new Exception("Wrong number");
+        }
       }
-      catch
+      catch(Exception e)
       {
-        Console.WriteLine("Wrong number");
+        Console.WriteLine("{0}", e.Message);
       }
       finally
       {
