@@ -83,19 +83,29 @@ namespace groupNamespace
         }
       public Student getStudent(ref Group g)
       {
-        Console.WriteLine("Enter name: ");
-        string name = Console.ReadLine();
-        for(int i = 0; i < g.getStudents().Count; i++)
+        try
         {
-          if(g.getStudents()[i].getName() == name)
+          Console.WriteLine("Enter name: ");
+          string name = Console.ReadLine();
+          for(int i = 0; i < g.getStudents().Count; i++)
           {
-            return g.getStudents()[i];
+            if(g.getStudents()[i].getName() == name)
+            {
+              return g.getStudents()[i];
+            }
           }
+          return null;
         }
-        return null;
+        catch (FormatException e)
+        {
+          Console.WriteLine("Wrong format {0}", e.Message);
+          return null;
+        }
       }
       public void editStudent(Student student)
       {
+        try
+        {
             Console.WriteLine("Enter name: ");
             string name = Console.ReadLine();
             student.setName(name);
@@ -124,9 +134,20 @@ namespace groupNamespace
             Console.WriteLine("Enter postal code: ");
             int postalCode = Convert.ToInt32(Console.ReadLine());
             student.setAdress(street, streetN, city, postalCode);
+          }
+          catch(FormatException e)
+          {
+            Console.WriteLine("Wrong format {0}", e.Message);
+          }
+          catch(NullReferenceException e)
+          {
+            Console.WriteLine("No object {0}",e.Message);
+          }
         }
         public void editGroup()
         {
+          try
+          {
             Console.WriteLine("Enter name: ");
             string name = Console.ReadLine();
             setName(name);
@@ -140,6 +161,15 @@ namespace groupNamespace
             {
                 editStudent(students[i]);
             }
+          }
+          catch(FormatException e)
+          {
+            Console.WriteLine("Wrong format {0}", e.Message);
+          }
+          catch(NullReferenceException e)
+          {
+            Console.WriteLine("No object {0}",e.Message);
+          }
         }
       public void transfer(ref Group a, ref Group b)
       {
@@ -147,17 +177,28 @@ namespace groupNamespace
       }
       public void delAll()
       {
-        int res = 0;
-        for(int i = 0; i < students.Count; i++)
+        try
         {
-          for(int j = 0; j < students[i].getExams().Count; i++)
+          int res = 0;
+          for(int i = 0; i < students.Count; i++)
           {
-            res += students[i].getExams()[j];
+            for(int j = 0; j < students[i].getExams().Count; i++)
+            {
+              res += students[i].getExams()[j];
+            }
+            if(res/students[i].getExams().Count != 7)
+            {
+              students.Remove(students[i]);
+            }
           }
-          if(res/students[i].getExams().Count != 7)
-          {
-            students.Remove(students[i]);
-          }
+        }
+        catch(NullReferenceException e)
+        {
+          Console.WriteLine("No object {0}",e.Message);
+        }
+        catch(IndexOutOfRangeException e)
+        {
+          Console.WriteLine("{0}", e.Message);
         }
       }
       public void deleteLeast()
