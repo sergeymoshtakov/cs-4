@@ -232,5 +232,13 @@ namespace groupNamespace
           }
         }
       }
+      public static bool operator ==(Group a, Group b)
+      {
+        return a.getStudents().Count == b.getStudents().Count;
+      }
+      public static bool operator !=(Group a, Group b)
+      {
+        return a.getStudents().Count != b.getStudents().Count;
+      }
     }
 }
