@@ -26,162 +26,189 @@ namespace studentNamespace
     }
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams)
     {
-      setName(name);
-      setSurname(surname);
-      setPatronim(patronim);
-      setBirth(year, month, day);
-      setAdress(street, streetN, city, postalCode);
-      setNumber(number);
-      setTests(tests);
-      setHomeTasks(homeTasks);
-      setExams(exams);
+      Name = name;
+      Surname = surname;
+      Patronim = patronim;
+      Birth = new DateTime(year, month, day);
+      Adress = new Adress(street, streetN, city, postalCode);
+      PhoneNumber = number;
+      Tests = tests;
+      HomeTasks = homeTasks;
+      Exams = exams;
       Console.WriteLine("Main c-tor");
     }
-    public string getName()
+    public string Name
     {
-      return name;
-    }
-    public string getSurname()
-    {
-      return surname;
-    }
-    public string getPatronim()
-    {
-      return patronim;
-    }
-    public DateTime getBirth()
-    {
-      return birth;
-    }
-    public Adress getAdress()
-    {
-      return adress;
-    }
-    public string getPhone()
-    {
-      return phoneNumber;
-    }
-    public List<int> getTests()
-    {
-      return tests;
-    }
-    public List<int> getHometasks()
-    {
-      return homeTasks;
-    }
-    public List<int> getExams()
-    {
-      return exams;
-    }
-    public void setName(string name)
-    {
-      try
+      set
       {
-        if(name.Length>0)
+        try
         {
-          this.name = name;
+          if(value.Length>0)
+          {
+            name = value;
+          }
+          else
+          {
+            throw new Exception("Wrong name");
+          }
         }
-        else
+        catch(Exception e)
         {
-          throw new Exception("Wrong name");
+          Console.WriteLine("{0}", e.Message);
         }
       }
-      catch(Exception e)
+      get
       {
-        Console.WriteLine("{0}", e.Message);
+        return name;
       }
     }
-    public void setSurname(string surname)
+    public string Surname
     {
-      try
+      set
       {
-        if(surname.Length>0)
+        try
         {
-          this.surname = surname;
+          if(value.Length>0)
+          {
+            surname = value;
+          }
+          else
+          {
+            throw new Exception("Wrong surname");
+          }
         }
-        else
+        catch(Exception e)
         {
-          throw new Exception("Wrong surname");
+          Console.WriteLine("{0}", e.Message);
         }
       }
-      catch(Exception e)
+      get
       {
-        Console.WriteLine("{0}", e.Message);
+        return surname;
       }
     }
-    public void setPatronim(string patronim)
+    public string Patronim
     {
-      try
+      set
       {
-        if(patronim.Length>0)
+        try
         {
-          this.patronim = patronim;
+          if(value.Length>0)
+          {
+            patronim = value;
+          }
+          else
+          {
+            throw new Exception("Wrong patronim");
+          }
         }
-        else
+        catch(Exception e)
         {
-          throw new Exception("Wrong patronim");
-        }
-      }
-      catch(Exception e)
-      {
-        Console.WriteLine("{0}", e.Message);
-      }
-    }
-    public void setBirth(int year, int month, int day)
-    {
-      try
-      {
-        if((year>0)&&(month>0)&&(month<13)&&(day>0)&&(day<32))
-        {
-          this.birth = new DateTime(year,month,day);
-        }
-        else
-        {
-          throw new Exception("Wrong date");
+          Console.WriteLine("{0}", e.Message);
         }
       }
-      catch(Exception e)
+      get
       {
-        Console.WriteLine("{0}", e.Message);
+        return patronim;
       }
     }
-    public void setNumber(string phoneNumber)
+    public string PhoneNumber
     {
-      try
+      set
       {
-        if(Regex.IsMatch(phoneNumber, @"((380|\+380)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}"))
+        try
         {
-          this.phoneNumber = phoneNumber;
+          if(Regex.IsMatch(value, @"((380|\+380)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}"))
+          {
+            phoneNumber = value;
+          }
+          else
+          {
+            throw new Exception("Wrong number");
+          }
         }
-        else
+        catch(Exception e)
         {
-          throw new Exception("Wrong number");
+          Console.WriteLine("{0}", e.Message);
+        }
+        finally
+        {
+          Console.WriteLine("Number is good");
         }
       }
-      catch(Exception e)
+      get
       {
-        Console.WriteLine("{0}", e.Message);
-      }
-      finally
-      {
-        Console.WriteLine("Number is good");
+        return phoneNumber;
       }
     }
-    public void setAdress(string street, int streetN, string city, int postalCode)
+    public List<int> Tests
     {
-      adress = new Adress(street, streetN, city, postalCode);
+      get
+      {
+        return tests;
+      }
+      set
+      {
+        tests = value;
+      }
     }
-    public void setTests(List<int> tests)
+    public List<int> HomeTasks
     {
-      this.tests = tests;
+      get
+      {
+        return homeTasks;
+      }
+      set
+      {
+        exams = value;
+      }
     }
-    public void setHomeTasks(List<int> homeTasks)
+    public List<int> Exams
     {
-      this.homeTasks = homeTasks;
+      get
+      {
+        return exams;
+      }
+      set
+      {
+        exams = value;
+      }
     }
-    public void setExams(List<int> exams)
+    public Adress Adress
     {
-      this.exams = exams;
+      get
+      {
+        return adress;
+      }
+      set
+      {
+        adress = new Adress(value.Street, value.StreetN, value.City, value.PostalCode);
+      }
+    }
+    public DateTime Birth
+    {
+      get
+      {
+        return birth;
+      }
+      set
+      {
+        try
+        {
+          if((value.Year>0)&&(value.Month>0)&&(value.Month<13)&&(value.Day>0)&&(value.Day<32))
+          {
+            birth = new DateTime(value.Year, value.Month, value.Day);
+          }
+          else
+          {
+            throw new Exception("Wrong date");
+          }
+        }
+        catch(Exception e)
+        {
+          Console.WriteLine("{0}", e.Message);
+        }
+      }
     }
     public override string ToString()
     {
@@ -219,39 +246,39 @@ namespace studentNamespace
       {
         Console.WriteLine("No array list {0}", e.Message);
       }
-      return getName() + "\n" + getSurname() + "\n" + getPatronim() + "\n" + getBirth() + "\n" + getAdress() + "\n" + getPhone() + testStr + taskStr + examStr;
+      return Name + "\n" + Surname + "\n" + Patronim + "\n" + Birth + "\n" + Adress + "\n" + PhoneNumber + testStr + taskStr + examStr;
     }
     public static bool operator ==(Student a, Student b)
     {
       int sum1 = 0, sum2 = 0, length1 = 0, length2 = 0;
       try
       {
-        foreach(var test in a.getTests())
+        foreach(var test in a.Tests)
         {
           sum1 += test;
           length1++;
         }
-        foreach(var task in a.getHometasks())
+        foreach(var task in a.HomeTasks)
         {
           sum1 += task;
           length1++;
         }
-        foreach(var exam in a.getExams())
+        foreach(var exam in a.Exams)
         {
           sum1 += exam;
           length1++;
         }
-        foreach(var test in b.getTests())
+        foreach(var test in b.Tests)
         {
           sum2 += test;
           length2++;
         }
-        foreach(var task in b.getHometasks())
+        foreach(var task in b.HomeTasks)
         {
           sum2 += task;
           length2++;
         }
-        foreach(var exam in b.getExams())
+        foreach(var exam in b.Exams)
         {
           sum2 += exam;
           length2++;
@@ -277,32 +304,32 @@ namespace studentNamespace
       int sum1 = 0, sum2 = 0, length1 = 0, length2 = 0;
       try
       {
-        foreach(var test in a.getTests())
+        foreach(var test in a.Tests)
         {
           sum1 += test;
           length1++;
         }
-        foreach(var task in a.getHometasks())
+        foreach(var task in a.HomeTasks)
         {
           sum1 += task;
           length1++;
         }
-        foreach(var exam in a.getExams())
+        foreach(var exam in a.Exams)
         {
           sum1 += exam;
           length1++;
         }
-        foreach(var test in b.getTests())
+        foreach(var test in b.Tests)
         {
           sum2 += test;
           length2++;
         }
-        foreach(var task in b.getHometasks())
+        foreach(var task in b.HomeTasks)
         {
           sum2 += task;
           length2++;
         }
-        foreach(var exam in b.getExams())
+        foreach(var exam in b.Exams)
         {
           sum2 += exam;
           length2++;
