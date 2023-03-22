@@ -10,81 +10,93 @@ namespace adressNamespace
     private int postalCode;
     public Adress()
     {
-      setStreet("Sadovaya");
-      setCity("Odessa");
-      setStreetN(3);
-      setPostalCode(1111);
+      Street = "Sadovaya";
+      StreetN = 3;
+      City = "Odessa";
+      PostalCode = 1111;
     }
     public Adress(string street, int streetN, string city, int postalCode)
     {
-      setStreet(street);
-      setCity(city);
-      setStreetN(streetN);
-      setPostalCode(postalCode);
+      Street = street;
+      StreetN = streetN;
+      City = city;
+      PostalCode = postalCode;
     }
-    public string getStreet()
+    public string Street
     {
-      return street;
-    }
-    public string getCity()
-    {
-      return city;
-    }
-    public int getStreetN()
-    {
-      return streetN;
-    }
-    public int getPostalCode()
-    {
-      return postalCode;
-    }
-    public void setStreet(string street)
-    {
-      if(street.Length!=0)
+      get
       {
-        this.street = street;
+        return street;
       }
-      else
+      set
       {
-        this.street = "NONE";
+        if(value.Length!=0)
+        {
+          street = value;
+        }
+        else
+        {
+          street = "NONE";
+        }
       }
     }
-    public void setCity(string city)
+    public string City
     {
-      if(city.Length!=0)
+      get
       {
-        this.city = city;
+        return city;
       }
-      else
+      set
       {
-        this.city = "NONE";
+        if(value.Length!=0)
+        {
+          city = value;
+        }
+        else
+        {
+          city = "NONE";
+        }
       }
     }
-    public void setPostalCode(int postalCode)
+    public int PostalCode
     {
-      if(postalCode>0)
+      set
       {
-        this.postalCode = postalCode;
+        if(value>0)
+        {
+          postalCode = value;
+        }
+        else
+        {
+          postalCode = 1111;
+        }
       }
-      else
+      get
       {
-        this.postalCode = 1111;
+        return postalCode;
       }
     }
-    public void setStreetN(int streetN)
+    public int StreetN
     {
-      if(streetN>0)
+      set
       {
-        this.streetN = streetN;
+        if(value>0)
+        {
+          streetN = value;
+        }
+        else
+        {
+          streetN = 1;
+        }
       }
-      else
+      get
       {
-        this.streetN = 1;
+        return streetN;
       }
     }
     public override string ToString()
     {
-      return getStreet() + " " + getStreetN() + " " + getCity() + " " + getPostalCode();
+      return Street + " " + StreetN + " " + City + " " + PostalCode;
     }
   }
 }
