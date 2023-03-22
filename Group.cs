@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using studentNamespace;
+using adressNamespace;
 
 namespace groupNamespace
 {
@@ -16,65 +17,77 @@ namespace groupNamespace
             {
                 this.students.Add(new Student());
             }
-            setName("fsd312");
-            setSpecialisation("OOP - 1");
-            setCourse(1);
+            Name = "fsd312";
+            Specialisation = "OOP - 1";
+            Course = 1;
         }
         public Group(List<Student> students)
         {
-            setStudents(students);
-            setName("fsd312");
-            setSpecialisation("OOP - 1");
-            setCourse(1);
+            Students = students;
+            Name = "fsd312";
+            Specialisation = "OOP - 1";
+            Course = 1;
         }
         public Group(Group group)
         {
-            setStudents(group.getStudents());
-            setName(group.getName());
-            setSpecialisation(group.getSpecialisation());
-            setCourse(group.getCourse());
+            Students = group.Students;
+            Name = group.Name;
+            Specialisation = group.Specialisation;
+            Course = group.Course;
         }
-        public void setStudents(List<Student> students)
+      public string Name
+      {
+        set
         {
-            this.students = students;
+          name = value;
         }
-        public void setName(string name)
+        get
         {
-            this.name = name;
+          return name;
         }
-        public void setSpecialisation(string specialisation)
+      }
+      public string Specialisation
+      {
+        set
         {
-            this.specialisation = specialisation;
+          specialisation = value;
         }
-        public void setCourse(int course)
+        get
         {
-            this.course = course;
+          return specialisation;
         }
-        public int getCourse()
+      }
+      public int Course
+      {
+        set
         {
-            return course;
+          course = value;
         }
-        public string getSpecialisation()
+        get
         {
-            return specialisation;
+          return course;
         }
-        public string getName()
+      }
+      public List<Student> Students
+      {
+        get
         {
-            return name;
+          return students;
         }
-        public List<Student> getStudents()
+        set
         {
-            return students;
+          students = value;
         }
+      }
         public void showAll()
         {
             int i = 1;
-            Console.WriteLine(getName());
-            Console.WriteLine(getSpecialisation());
-            students.Sort((left, right) => left.getSurname().CompareTo(right.getSurname()));
+            Console.WriteLine(Name);
+            Console.WriteLine(Specialisation);
+            students.Sort((left, right) => left.Surname.CompareTo(right.Surname));
             foreach (Student student in students)
             {
-                Console.WriteLine(i + " " + student.getSurname() + " " + student.getName());
+                Console.WriteLine(i + " " + student.Surname + " " + student.Name);
             }
         }
         public void addStudent(Student student)
@@ -87,11 +100,11 @@ namespace groupNamespace
         {
           Console.WriteLine("Enter name: ");
           string name = Console.ReadLine();
-          for(int i = 0; i < g.getStudents().Count; i++)
+          for(int i = 0; i < g.Students.Count; i++)
           {
-            if(g.getStudents()[i].getName() == name)
+            if(g.Students[i].Name == name)
             {
-              return g.getStudents()[i];
+              return g.Students[i];
             }
           }
           return null;
@@ -108,23 +121,23 @@ namespace groupNamespace
         {
             Console.WriteLine("Enter name: ");
             string name = Console.ReadLine();
-            student.setName(name);
+            student.Name = name;
             Console.WriteLine("Enter surname: ");
             string surname = Console.ReadLine();
-            student.setSurname(surname);
+            student.Surname = surname;
             Console.WriteLine("Enter patronim: ");
             string patronim = Console.ReadLine();
-            student.setPatronim(patronim);
+            student.Patronim = patronim;
             Console.WriteLine("Enter phone number: ");
             string phoneNumber = Console.ReadLine();
-            student.setNumber(phoneNumber);
+            student.PhoneNumber = phoneNumber;
             Console.WriteLine("Enter year of birth: ");
             int year = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter month of birth: ");
             int month = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter day of birth: ");
             int day = Convert.ToInt32(Console.ReadLine());
-            student.setBirth(year, month, day);
+            student.Birth = new DateTime(year, month, day);
             Console.WriteLine("Enter you street: ");
             string street = Console.ReadLine();
             Console.WriteLine("Enter number of street: ");
@@ -133,7 +146,7 @@ namespace groupNamespace
             string city = Console.ReadLine();
             Console.WriteLine("Enter postal code: ");
             int postalCode = Convert.ToInt32(Console.ReadLine());
-            student.setAdress(street, streetN, city, postalCode);
+            student.Adress = new Adress(street, streetN, city, postalCode);
           }
           catch(FormatException e)
           {
@@ -150,13 +163,13 @@ namespace groupNamespace
           {
             Console.WriteLine("Enter name: ");
             string name = Console.ReadLine();
-            setName(name);
+            Name = name;
             Console.WriteLine("Enter specialisation: ");
             string specialisation = Console.ReadLine();
-            setSpecialisation(specialisation);
+            Specialisation = specialisation;
             Console.WriteLine("Enter course: ");
             int course = Convert.ToInt32(Console.ReadLine());
-            setCourse(course);
+            Course = course;
             for (int i = 0; i < students.Count; i++)
             {
                 editStudent(students[i]);
@@ -182,11 +195,11 @@ namespace groupNamespace
           int res = 0;
           for(int i = 0; i < students.Count; i++)
           {
-            for(int j = 0; j < students[i].getExams().Count; i++)
+            for(int j = 0; j < students[i].Exams.Count; i++)
             {
-              res += students[i].getExams()[j];
+              res += students[i].Exams[j];
             }
-            if(res/students[i].getExams().Count != 7)
+            if(res/students[i].Exams.Count != 7)
             {
               students.Remove(students[i]);
             }
@@ -204,15 +217,15 @@ namespace groupNamespace
       public void deleteLeast()
       {
         int res = 0, min = 0;
-        for(int i = 0; i < students[0].getExams().Count; i++)
+        for(int i = 0; i < students[0].Exams.Count; i++)
         {
-          min += students[0].getExams()[i];
+          min += students[0].Exams[i];
         }
         for(int i = 0; i < students.Count; i++)
         {
-          for(int j = 0; j < students[i].getExams().Count; i++)
+          for(int j = 0; j < students[i].Exams.Count; i++)
           {
-            res += students[i].getExams()[j];
+            res += students[i].Exams[j];
           }
           if(min > res)
           {
@@ -222,9 +235,9 @@ namespace groupNamespace
         }
         for(int i = 0; i < students.Count; i++)
         {
-          for(int j = 0; j < students[i].getExams().Count; i++)
+          for(int j = 0; j < students[i].Exams.Count; i++)
           {
-            res += students[i].getExams()[j];
+            res += students[i].Exams[j];
           }
           if(res == min)
           {
@@ -234,11 +247,11 @@ namespace groupNamespace
       }
       public static bool operator ==(Group a, Group b)
       {
-        return a.getStudents().Count == b.getStudents().Count;
+        return a.Students.Count == b.Students.Count;
       }
       public static bool operator !=(Group a, Group b)
       {
-        return a.getStudents().Count != b.getStudents().Count;
+        return a.Students.Count != b.Students.Count;
       }
     }
 }
