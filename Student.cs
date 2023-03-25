@@ -1,18 +1,12 @@
 using System;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using adressNamespace;
+using personNamespace;
 
 namespace studentNamespace
 {
-  public class Student
+  public class Student : Person
   {
-    private string name;
-    private string surname;
-    private string patronim;
-    private DateTime birth;
-    private Adress adress;
-    private string phoneNumber;
     private List<int> tests = new List<int>();
     private List<int> homeTasks = new List<int>();
     private List<int> exams = new List<int>();
@@ -24,122 +18,12 @@ namespace studentNamespace
     {
       Console.WriteLine("Param c-tor");
     }
-    public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams)
+    public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams) : base (name, surname, patronim, year, month, day, street, streetN, city, postalCode, number)
     {
-      Name = name;
-      Surname = surname;
-      Patronim = patronim;
-      Birth = new DateTime(year, month, day);
-      Adress = new Adress(street, streetN, city, postalCode);
-      PhoneNumber = number;
       Tests = tests;
       HomeTasks = homeTasks;
       Exams = exams;
       Console.WriteLine("Main c-tor");
-    }
-    public string Name
-    {
-      set
-      {
-        try
-        {
-          if(value.Length>0)
-          {
-            name = value;
-          }
-          else
-          {
-            throw new Exception("Wrong name");
-          }
-        }
-        catch(Exception e)
-        {
-          Console.WriteLine("{0}", e.Message);
-        }
-      }
-      get
-      {
-        return name;
-      }
-    }
-    public string Surname
-    {
-      set
-      {
-        try
-        {
-          if(value.Length>0)
-          {
-            surname = value;
-          }
-          else
-          {
-            throw new Exception("Wrong surname");
-          }
-        }
-        catch(Exception e)
-        {
-          Console.WriteLine("{0}", e.Message);
-        }
-      }
-      get
-      {
-        return surname;
-      }
-    }
-    public string Patronim
-    {
-      set
-      {
-        try
-        {
-          if(value.Length>0)
-          {
-            patronim = value;
-          }
-          else
-          {
-            throw new Exception("Wrong patronim");
-          }
-        }
-        catch(Exception e)
-        {
-          Console.WriteLine("{0}", e.Message);
-        }
-      }
-      get
-      {
-        return patronim;
-      }
-    }
-    public string PhoneNumber
-    {
-      set
-      {
-        try
-        {
-          if(Regex.IsMatch(value, @"((380|\+380)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}"))
-          {
-            phoneNumber = value;
-          }
-          else
-          {
-            throw new Exception("Wrong number");
-          }
-        }
-        catch(Exception e)
-        {
-          Console.WriteLine("{0}", e.Message);
-        }
-        finally
-        {
-          Console.WriteLine("Number is good");
-        }
-      }
-      get
-      {
-        return phoneNumber;
-      }
     }
     public List<int> Tests
     {
@@ -172,42 +56,6 @@ namespace studentNamespace
       set
       {
         exams = value;
-      }
-    }
-    public Adress Adress
-    {
-      get
-      {
-        return adress;
-      }
-      set
-      {
-        adress = new Adress(value.Street, value.StreetN, value.City, value.PostalCode);
-      }
-    }
-    public DateTime Birth
-    {
-      get
-      {
-        return birth;
-      }
-      set
-      {
-        try
-        {
-          if((value.Year>0)&&(value.Month>0)&&(value.Month<13)&&(value.Day>0)&&(value.Day<32))
-          {
-            birth = new DateTime(value.Year, value.Month, value.Day);
-          }
-          else
-          {
-            throw new Exception("Wrong date");
-          }
-        }
-        catch(Exception e)
-        {
-          Console.WriteLine("{0}", e.Message);
-        }
       }
     }
     public override string ToString()
