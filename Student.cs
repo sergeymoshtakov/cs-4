@@ -10,20 +10,20 @@ namespace studentNamespace
     private List<int> tests = new List<int>();
     private List<int> homeTasks = new List<int>();
     private List<int> exams = new List<int>();
-    public Student() : this("Ivan", "Ivanov", "Ivanovich", 2000, 5, 7, "Pushkina", 28, "Odessa", 2141, "+380-800-735-35-35", new List<int>(), new List<int>(), new List<int>())
-    {
-      Console.WriteLine("Default c-tor");
-    }
-    public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number) : this(name, surname, patronim, year, month, day, street, streetN, city, postalCode, number, new List<int>(),new List<int>(),new List<int>())
-    {
-      Console.WriteLine("Param c-tor");
-    }
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams) : base (name, surname, patronim, year, month, day, street, streetN, city, postalCode, number)
     {
       Tests = tests;
       HomeTasks = homeTasks;
       Exams = exams;
       Console.WriteLine("Main c-tor");
+    }
+    public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number) : this(name, surname, patronim, year, month, day, street, streetN, city, postalCode, number, new List<int>(),new List<int>(),new List<int>())
+    {
+      Console.WriteLine("Param c-tor");
+    }
+    public Student() : this("Ivan", "Ivanov", "Ivanovich", 2000, 5, 7, "Pushkina", 28, "Odessa", 2141, "+380-800-735-35-35", new List<int>(), new List<int>(), new List<int>())
+    {
+      Console.WriteLine("Default c-tor");
     }
     public List<int> Tests
     {
