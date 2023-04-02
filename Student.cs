@@ -5,7 +5,7 @@ using personNamespace;
 
 namespace studentNamespace
 {
-  public class Student : Person
+  public class Student : Person, IComparable
   {
     private List<int> tests = new List<int>();
     private List<int> homeTasks = new List<int>();
@@ -197,6 +197,24 @@ namespace studentNamespace
         Console.WriteLine("{0}", e.Message);
       }
       return false;
+    }
+    public int CompareTo(object o)
+    {
+      Student temp = o as Student;
+      int sum1 = 0, sum2 = 0, length1 = 0, length2 = 0;
+      foreach(var task in this.HomeTasks)
+      {
+        sum1 += task;
+        length1++;
+      }
+      foreach(var task in temp.HomeTasks)
+      {
+        sum2 += task;
+        length2++;
+      }
+      if((sum1/length1) > (sum2/length2)) return 1;
+      if((sum1/length1) < (sum2/length2)) return -1;
+      return 0;
     }
   }
 }
