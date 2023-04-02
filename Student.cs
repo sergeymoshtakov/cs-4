@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using adressNamespace;
 using personNamespace;
+using System.Linq;
 
 namespace studentNamespace
 {
@@ -12,9 +13,9 @@ namespace studentNamespace
     private List<int> exams = new List<int>();
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number, List<int> tests, List<int> homeTasks, List<int> exams) : base (name, surname, patronim, year, month, day, street, streetN, city, postalCode, number)
     {
-      Tests = tests;
-      HomeTasks = homeTasks;
-      Exams = exams;
+      this.SetTests(tests);
+      this.SetTasks(homeTasks);
+      this.SetExams(exams);
       Console.WriteLine("Main c-tor");
     }
     public Student(string name, string surname, string patronim, int year, int month, int day, string street, int streetN, string city, int postalCode, string number) : this(name, surname, patronim, year, month, day, street, streetN, city, postalCode, number, new List<int>(),new List<int>(),new List<int>())
@@ -24,6 +25,18 @@ namespace studentNamespace
     public Student() : this("Ivan", "Ivanov", "Ivanovich", 2000, 5, 7, "Pushkina", 28, "Odessa", 2141, "+380-800-735-35-35", new List<int>(), new List<int>(), new List<int>())
     {
       Console.WriteLine("Default c-tor");
+    }
+    public void SetTasks(List<int> tasks)
+    {
+      this.homeTasks = tasks;
+    }
+    public void SetTests(List<int> tests)
+    {
+      this.tests = tests;
+    }
+    public void SetExams(List<int> exams)
+    {
+      this.exams = exams;
     }
     public List<int> Tests
     {
@@ -201,17 +214,7 @@ namespace studentNamespace
     public int CompareTo(object o)
     {
       Student temp = o as Student;
-      int sum1 = 0, sum2 = 0, length1 = 0, length2 = 0;
-      foreach(var task in this.HomeTasks)
-      {
-        sum1 += task;
-        length1++;
-      }
-      foreach(var task in temp.HomeTasks)
-      {
-        sum2 += task;
-        length2++;
-      }
+      int sum1 = this.HomeTasks.ToArray().Sum(), sum2 = temp.HomeTasks.ToArray().Sum(), length1 = this.HomeTasks.Count, length2 = temp.HomeTasks.Count;
       if((sum1/length1) > (sum2/length2)) return 1;
       if((sum1/length1) < (sum2/length2)) return -1;
       return 0;
