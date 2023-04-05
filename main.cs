@@ -1,14 +1,17 @@
 using System;
 using studentNamespace;
 using System.Collections.Generic;
+using NameComparerNamespace;
+using AgeComparerNamespace;
+using groupNamespace;
 
 class Program {
   public static void Main (string[] args) {
     Student s1 = new Student("Ivan", "Ivanov", "Ivanovich", 2000, 5, 7, "Pushkina", 28, "Odessa", 2141, "+380-800-735-35-35", new List<int>() {12,12,12}, new List<int>() {10,9,10}, new List<int>() {10,9,10});
-    Student s2 = new Student("Petr", "Petrov", "Petrovich", 2000, 5, 7, "Gogola", 28, "Nikolaev", 2141, "+380-800-333-35-35", new List<int>() {12,12,12}, new List<int>() {12,12,12}, new List<int>() {10,9,10});
-    Student s3 = new Student("Sergey", "Sergeev", "Sergeevich", 2000, 5, 7, "Shevchenko", 28, "Kyiv", 2141, "+380-333-735-35-35", new List<int>() {12,12,12}, new List<int>() {10,3,6,2}, new List<int>() {10,9,10});
-    Student s4 = new Student("Anton", "Antonov", "Antonovich", 2000, 5, 7, "Franka", 28, "Sumy", 2432, "+380-800-735-21-21", new List<int>() {12,12,12}, new List<int>() {10,7,2,1,10}, new List<int>() {10,9,10});
-    Student s5 = new Student("Dmitri", "Dmitriev", "Dmitrievich", 2000, 5, 7, "Solnechnaya", 28, "Lvov", 2234, "+380-323-735-35-35", new List<int>() {12,12,12}, new List<int>() {8,3,5,10}, new List<int>() {10,9,10});
+    Student s2 = new Student("Petr", "Petrov", "Petrovich", 1823, 5, 7, "Gogola", 28, "Nikolaev", 2141, "+380-800-333-35-35", new List<int>() {12,12,12}, new List<int>() {12,12,12}, new List<int>() {10,9,10});
+    Student s3 = new Student("Sergey", "Sergeev", "Sergeevich", 1793, 4, 3, "Shevchenko", 28, "Kyiv", 2141, "+380-333-735-35-35", new List<int>() {12,12,12}, new List<int>() {10,3,6,2}, new List<int>() {10,9,10});
+    Student s4 = new Student("Anton", "Antonov", "Antonovich", 2020, 5, 7, "Franka", 28, "Sumy", 2432, "+380-800-735-21-21", new List<int>() {12,12,12}, new List<int>() {10,7,2,1,10}, new List<int>() {10,9,10});
+    Student s5 = new Student("Dmitri", "Dmitriev", "Dmitrievich", 2020, 5, 3, "Solnechnaya", 28, "Lvov", 2234, "+380-323-735-35-35", new List<int>() {12,12,12}, new List<int>() {8,3,5,10}, new List<int>() {10,9,10});
     List<Student> myList = new List<Student>() {s1, s2, s3, s4, s5};
     
     foreach(var stud in myList)
@@ -24,7 +27,17 @@ class Program {
       Console.WriteLine(stud);
     }
     
-    // Group gr = new Group();
+    Group gr = new Group();
+    gr.addStudent(s1);
+    gr.addStudent(s2);
+    gr.addStudent(s3);
+    gr.addStudent(s4);
+    gr.addStudent(s5);
+    Console.WriteLine("Foreach test:");
+    foreach (Student st in gr)
+    {
+      Console.WriteLine(st);
+    }
     // Student s = new Student();
     // gr.addStudent(s);
     // Console.WriteLine(gr[0]);
@@ -68,5 +81,18 @@ class Program {
     // {
     //   Console.WriteLine("No groups are not equal");
     // }
+    myList.Sort(new NameComparer());
+    Console.WriteLine("Name sort: ");
+    foreach(var stud in myList)
+    {
+      Console.WriteLine(stud);
+    }
+
+    myList.Sort(new AgeComparer());
+    Console.WriteLine("Age sort: ");
+    foreach(var stud in myList)
+    {
+      Console.WriteLine(stud);
+    }
   }
 }
