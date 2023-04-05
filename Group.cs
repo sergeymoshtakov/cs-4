@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using studentNamespace;
 using adressNamespace;
+using studentEnumeratorNamespace;
+using System.Collections;
 
 namespace groupNamespace
 {
-    class Group
+    class Group : IEnumerable
     {
         private List<Student> students = new List<Student>();
         private string name;
@@ -77,6 +79,47 @@ namespace groupNamespace
         set
         {
           students = value;
+        }
+      }
+
+      public Student this[int index]
+      {
+        get
+        {
+          try
+          {
+            if(index <= 0 && index < Students.Count)
+            {
+              return students[index];
+            }
+            else
+            {
+              throw new IndexOutOfRangeException();
+            }
+          }
+          catch(IndexOutOfRangeException e)
+          {
+            Console.WriteLine(@"{0}", e.Message);
+          }
+          return null;
+        }
+        set
+        {
+          try
+          {
+            if(index <= 0 && index < students.Count)
+            {
+              students[index] = value;
+            }
+            else
+            {
+              throw new IndexOutOfRangeException();
+            }
+          }
+          catch(IndexOutOfRangeException e)
+          {
+            Console.WriteLine(@"{0}", e.Message);
+          }
         }
       }
         public void showAll()
@@ -253,5 +296,7 @@ namespace groupNamespace
       {
         return a.Students.Count != b.Students.Count;
       }
+
+      public IEnumerator GetEnumerator() => new StudentEnumerator(students);
     }
 }
