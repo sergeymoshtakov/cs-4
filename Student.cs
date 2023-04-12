@@ -251,7 +251,7 @@ namespace studentNamespace
         public int CompareTo(object o)
         {
             Student temp = o as Student;
-            int sum1 = this.HomeTasks.ToArray().Sum(), sum2 = temp.HomeTasks.ToArray().Sum(), length1 = this.HomeTasks.Count, length2 = temp.HomeTasks.Count;
+            int sum1 = this.HomeTasks.ToArray().Sum() + this.Tests.ToArray().Sum() + this.Exams.ToArray().Sum(), sum2 = temp.HomeTasks.ToArray().Sum() + temp.Tests.ToArray().Sum() + temp.Exams.ToArray().Sum(), length1 = this.HomeTasks.Count + this.Tests.Count + this.Exams.Count, length2 = temp.HomeTasks.Count + temp.Tests.Count + temp.Exams.Count;
             if ((sum1 / length1) > (sum2 / length2)) return 1;
             if ((sum1 / length1) < (sum2 / length2)) return -1;
             return 0;
