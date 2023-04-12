@@ -5,7 +5,29 @@ using NameComparerNamespace;
 using AgeComparerNamespace;
 using groupNamespace;
 
+
 class Program {
+  public delegate bool Comparer(object obj1, object obj2);
+
+  public static class Sorter
+  {
+    public static void Sort(List<object> st, Comparer del)
+    {
+      for(int i=0; i < st.Count; i++)
+      {
+        for(int j = i + 1; j < st.Count; j++)
+        {
+          if (del(st[j], st[i]))
+          {
+            object temporary = st[i];
+            st[i] = st[j];
+            st[j] = temporary;
+          }
+        }
+      }
+    }
+  }
+  
   public static void Main (string[] args) {
     Student s1 = new Student("Ivan", "Ivanov", "Ivanovich", 2000, 5, 7, "Pushkina", 28, "Odessa", 2141, "+380-800-735-35-35", new List<int>() {12,12,12}, new List<int>() {10,9,10}, new List<int>() {10,9,10});
     Student s2 = new Student("Petr", "Petrov", "Petrovich", 1823, 5, 7, "Gogola", 28, "Nikolaev", 2141, "+380-800-333-35-35", new List<int>() {12,12,12}, new List<int>() {12,12,12}, new List<int>() {10,9,10});
@@ -13,6 +35,7 @@ class Program {
     Student s4 = new Student("Anton", "Antonov", "Antonovich", 2020, 5, 7, "Franka", 28, "Sumy", 2432, "+380-800-735-21-21", new List<int>() {12,12,12}, new List<int>() {10,7,2,1,10}, new List<int>() {10,9,10});
     Student s5 = new Student("Dmitri", "Dmitriev", "Dmitrievich", 2020, 5, 3, "Solnechnaya", 28, "Lvov", 2234, "+380-323-735-35-35", new List<int>() {12,12,12}, new List<int>() {8,3,5,10}, new List<int>() {10,9,10});
     List<Student> myList = new List<Student>() {s1, s2, s3, s4, s5};
+    List<object> myList1 = new List<object>() {s1, s2, s3, s4, s5};
     
     foreach(var stud in myList)
     {
@@ -91,6 +114,22 @@ class Program {
     myList.Sort(new AgeComparer());
     Console.WriteLine("Age sort: ");
     foreach(var stud in myList)
+    {
+      Console.WriteLine(stud);
+    }
+
+    Sorter.Sort(myList1, delegate(object o1, object o2)
+    {
+      Student left = o1 as Student;
+      Student right = o2 as Student;
+      if (left == null || right == null)
+      {
+        throw new Exception("The value is null");
+      }
+      return ((Student)o1).CompareTo(((Student)o2)) > 0;
+    });
+    Console.WriteLine("Mark sort: ");
+    foreach(var stud in myList1)
     {
       Console.WriteLine(stud);
     }
