@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NameComparerNamespace;
 using AgeComparerNamespace;
 using groupNamespace;
+using System.IO;
 
 
 class Program {
@@ -35,32 +36,32 @@ class Program {
     Student s4 = new Student("Anton", "Antonov", "Antonovich", 2020, 5, 7, "Franka", 28, "Sumy", 2432, "+380-800-735-21-21", new List<int>() {12,12,12}, new List<int>() {10,7,2,1,10}, new List<int>() {10,9,10});
     Student s5 = new Student("Dmitri", "Dmitriev", "Dmitrievich", 2020, 5, 3, "Solnechnaya", 28, "Lvov", 2234, "+380-323-735-35-35", new List<int>() {12,12,12}, new List<int>() {8,3,5,10}, new List<int>() {10,9,10});
     List<Student> myList = new List<Student>() {s1, s2, s3, s4, s5};
-    List<object> myList1 = new List<object>() {s1, s2, s3, s4, s5};
+    // List<object> myList1 = new List<object>() {s1, s2, s3, s4, s5};
     
-    foreach(var stud in myList)
-    {
-      Console.WriteLine(stud);
-    }
+    // foreach(var stud in myList)
+    // {
+    //   Console.WriteLine(stud);
+    // }
 
-    Console.WriteLine("Sorted version: \n");
+    // Console.WriteLine("Sorted version: \n");
     
-    myList.Sort();
-    foreach(var stud in myList)
-    {
-      Console.WriteLine(stud);
-    }
+    // myList.Sort();
+    // foreach(var stud in myList)
+    // {
+    //   Console.WriteLine(stud);
+    // }
     
-    Group gr = new Group();
-    gr.addStudent(s1);
-    gr.addStudent(s2);
-    gr.addStudent(s3);
-    gr.addStudent(s4);
-    gr.addStudent(s5);
-    Console.WriteLine("Foreach test:");
-    foreach (Student st in gr)
-    {
-      Console.WriteLine(st);
-    }
+    // Group gr = new Group();
+    // gr.addStudent(s1);
+    // gr.addStudent(s2);
+    // gr.addStudent(s3);
+    // gr.addStudent(s4);
+    // gr.addStudent(s5);
+    // Console.WriteLine("Foreach test:");
+    // foreach (Student st in gr)
+    // {
+    //   Console.WriteLine(st);
+    // }
     // Student s = new Student();
     // gr.addStudent(s);
     // Console.WriteLine(gr[0]);
@@ -104,34 +105,52 @@ class Program {
     // {
     //   Console.WriteLine("No groups are not equal");
     // }
-    myList.Sort(new NameComparer());
-    Console.WriteLine("Name sort: ");
-    foreach(var stud in myList)
-    {
-      Console.WriteLine(stud);
-    }
+  //   myList.Sort(new NameComparer());
+  //   Console.WriteLine("Name sort: ");
+  //   foreach(var stud in myList)
+  //   {
+  //     Console.WriteLine(stud);
+  //   }
 
-    myList.Sort(new AgeComparer());
-    Console.WriteLine("Age sort: ");
-    foreach(var stud in myList)
-    {
-      Console.WriteLine(stud);
-    }
+  //   myList.Sort(new AgeComparer());
+  //   Console.WriteLine("Age sort: ");
+  //   foreach(var stud in myList)
+  //   {
+  //     Console.WriteLine(stud);
+  //   }
 
-    Sorter.Sort(myList1, delegate(object o1, object o2)
+  //   Sorter.Sort(myList1, delegate(object o1, object o2)
+  //   {
+  //     Student left = o1 as Student;
+  //     Student right = o2 as Student;
+  //     if (left == null || right == null)
+  //     {
+  //       throw new Exception("The value is null");
+  //     }
+  //     return ((Student)o1).CompareTo(((Student)o2)) > 0;
+  //   });
+  //   Console.WriteLine("Mark sort: ");
+  //   foreach(var stud in myList1)
+  //   {
+  //     Console.WriteLine(stud);
+  //   }
+    SortedDictionary<string, Student> dict1 = new SortedDictionary<string, Student>();
+    dict1.Add("od001",s1);
+    dict1.Add("od002",s2);
+    dict1.Add("ki001",s3);
+    dict1.Add("ki002",s4);
+    dict1.Add("od003",s5);
+    foreach (KeyValuePair<string, Student> item in dict1)
     {
-      Student left = o1 as Student;
-      Student right = o2 as Student;
-      if (left == null || right == null)
+      Console.WriteLine("{0}: {1}", item.Key, item.Value.Name);
+    }
+    string path = "note1.txt";
+    using (StreamWriter writer = new StreamWriter(path, true))
+    {
+      foreach(var stud in myList)
       {
-        throw new Exception("The value is null");
+        writer.WriteLine(stud);
       }
-      return ((Student)o1).CompareTo(((Student)o2)) > 0;
-    });
-    Console.WriteLine("Mark sort: ");
-    foreach(var stud in myList1)
-    {
-      Console.WriteLine(stud);
     }
   }
 }
