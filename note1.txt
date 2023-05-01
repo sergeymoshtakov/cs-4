@@ -1,0 +1,45 @@
+Ivan
+Ivanov
+Ivanovich
+5/7/2000 12:00:00AM
+Pushkina 28 Odessa 2141
+12 Good
+10 Good
+10 Good
+
+Petr
+Petrov
+Petrovich
+5/7/1823 12:00:00AM
+Gogola 28 Nikolaev 2141
+12 Good
+12 Good
+10 Good
+
+Sergey
+Sergeev
+Sergeevich
+4/3/1793 12:00:00AM
+Shevchenko 28 Kyiv 2141
+12 Good
+2 Satisfactory
+10 Good
+
+Anton
+Antonov
+Antonovich
+5/7/2020 12:00:00AM
+Franka 28 Sumy 2432
+12 Good
+10 Good
+10 Good
+
+Dmitri
+Dmitriev
+Dmitrievich
+5/3/2020 12:00:00AM
+Solnechnaya 28 Lvov 2234
+12 Good
+10 Good
+10 Good
+
